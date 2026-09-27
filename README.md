@@ -22,10 +22,15 @@ A feedback collection system for a gas utility's Customer Facilitation Center, w
 Week 1 — Environment and toolchain setup. No functional code yet.
 
 ## Setup
+Frontend scaffold only (Week 1 — no form or email backend yet).
+
 ```bash
 npm install
 npm run dev
 ```
+
+Opens the Vite app at the URL printed in the terminal.
+
 
 ## License
 MIT — see [LICENSE](./LICENSE)
