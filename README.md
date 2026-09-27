@@ -15,22 +15,26 @@ A feedback collection system for a gas utility's Customer Facilitation Center, w
 
 ## Stack
 - Frontend: React + TypeScript + Vite (customer-facing feedback form)
-- Backend: Node.js (serverless function or lightweight API) + email service (e.g. Nodemailer/SendGrid) for notifications
-- No local server or LAN dependency required
-
-## Status
-Week 1 — Environment and toolchain setup. No functional code yet.
+- Backend: Node.js (lightweight API) + Nodemailer for incharge notifications
+- No local server or LAN dependency required at the office
 
 ## Setup
-Frontend scaffold only (Week 1 — no form or email backend yet).
 
 ```bash
 npm install
-npm run dev
 ```
 
-Opens the Vite app at the URL printed in the terminal.
+Copy `.env.example` to `.env` and set `INCHARGE_EMAIL` plus SMTP credentials when you want live email. Without SMTP, submissions still succeed and the API logs the message that would have been emailed.
 
+Run the form and API together:
+
+```bash
+npm run dev:all
+```
+
+- Form: http://localhost:5173
+- Optional counter QR target: http://localhost:5173/?counter=2
+- API: http://127.0.0.1:3001/api/health
 
 ## License
 MIT — see [LICENSE](./LICENSE)
