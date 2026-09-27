@@ -1,0 +1,23 @@
+# Project Conventions — Customer Feedback Module
+
+## Context
+Customer-facing feedback form for a gas utility's facilitation center. Customers scan a static QR/barcode at the counter using their own phone and mobile data. On submission, feedback is emailed directly to the incharge. No internet is required anywhere at the office.
+
+## Stack
+- Frontend: React + TypeScript + Vite
+- Backend: Node.js (serverless/lightweight API) + email service integration
+- No LAN server, no local database
+
+## Conventions
+- Components: PascalCase, one per file, in /src/components
+- Types: explicit TypeScript interfaces for feedback data
+- Folders: /src/components, /src/pages, /src/lib, /src/types, /server
+
+## Commit Convention
+Conventional Commits: feat, fix, docs, chore, refactor, style
+
+## AI Assistant Notes
+- Mobile-first, customer's own phone only
+- Never assume office/staff internet access
+- Trigger email to incharge on submission, no dashboard needed for MVP
+- Follow Conventional Commits for commit messages
