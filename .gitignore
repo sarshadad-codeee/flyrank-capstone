@@ -137,6 +137,9 @@ dist
 !.yarn/sdks
 !.yarn/versions
 
+# Local email outbox (generated on submit)
+server/outbox/*.eml
+
 # Vite files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

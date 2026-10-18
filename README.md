@@ -19,17 +19,22 @@ A feedback collection system for a gas utility's Customer Facilitation Center, w
 - No local server or LAN dependency required
 
 ## Status
-Week 1 — Environment and toolchain setup. No functional code yet.
+Round 2 - Customer feedback form, validation, local email outbox, and unit tests.
 
 ## Setup
-Frontend scaffold only (Week 1 — no form or email backend yet).
 
 ```bash
 npm install
 npm run dev
 ```
 
-Opens the Vite app at the URL printed in the terminal.
+Opens the Vite app at the URL printed in the terminal. QR links can include a counter, for example `http://localhost:5173/?counter=2`.
+
+Submit writes a local `.eml` file under `server/outbox`. The incharge address lives only in `INCHARGE_EMAIL` on the server (`server/.env.example`). It is never sent to the browser.
+
+```bash
+npm test
+```
 
 
 ## License
