@@ -19,7 +19,7 @@ A feedback collection system for a gas utility's Customer Facilitation Center, w
 - No local server or LAN dependency required
 
 ## Status
-Round 2 - Customer feedback form, validation, local email outbox, and unit tests.
+Customer feedback form with validation, local email outbox, and unit tests.
 
 ## Setup
 
