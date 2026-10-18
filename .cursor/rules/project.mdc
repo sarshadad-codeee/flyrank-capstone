@@ -21,3 +21,12 @@ Conventional Commits: feat, fix, docs, chore, refactor, style
 - Never assume office/staff internet access
 - Trigger email to incharge on submission, no dashboard needed for MVP
 - Follow Conventional Commits for commit messages
+
+
+## Rules learned in FE-03
+- Phone numbers: strip to digits, require 10-13 digits, reject repeated-digit numbers. Enforce in both src/lib/validateFeedback.ts and server/feedbackHandler.mjs. Tests must include "0000000000" and "----------".
+- Every new function or component ships with a Vitest test in the same commit. Run npm test before committing and report the pass count.
+- UI text and source files are ASCII-only. This command must print nothing: git grep -nP "[^\x00-\x7F]" -- src server
+- The incharge address exists only in server env config (INCHARGE_EMAIL). This command must print nothing: git grep -n -E "INCHARGE_EMAIL|incharge@" -- src
+- Form controls use <label htmlFor> and aria-describedby for errors. Tests locate fields with getByLabelText or getByRole. Rating buttons show visible text labels ("Very poor" to "Excellent"), not only digits.
+- README Status describes the product only. Never write round, week or assignment labels into docs.
