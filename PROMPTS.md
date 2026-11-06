@@ -13,3 +13,7 @@ data from a server function, plus an /api/health route returning the same data.
 Read the incharge email only from a server-side env variable.
 Review notes: the template enables Cache Components, so the health page wraps
 its uncached read in Suspense, as the bundled Next.js docs describe.
+
+## 2. Vitest and a health test (Claude, not Cursor)
+Prompt:
+Add Vitest. Write tests for getHealth: status ok, service name, node version, ISO timestamp, email configured flag, and that the email address itself is never returned. Mock next/server because connection() needs a real request.
