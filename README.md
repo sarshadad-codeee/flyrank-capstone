@@ -1,4 +1,4 @@
-# Customer Feedback Module — Gas Utility Facilitation Center
+# Customer Feedback Module - Gas Utility Facilitation Center
 
 ## Overview
 A feedback collection system for a gas utility's Customer Facilitation Center, where counter staff currently have no way to capture customer feedback after service (bill installment, duplicate bill, name/address correction, bank query, high billing complaints, etc.).
@@ -11,26 +11,45 @@ A feedback collection system for a gas utility's Customer Facilitation Center, w
 - A static QR/barcode is placed at each counter.
 - Customers scan it using their own phone and mobile data (no office network involved).
 - Feedback is submitted through a simple web form.
-- On submission, the incharge receives the feedback directly via **email** — no login, no dashboard, no internet needed at the office.
+- On submission, the incharge receives the feedback directly via **email** - no login, no dashboard, no internet needed at the office.
 
 ## Stack
-- Frontend: React + TypeScript + Vite (customer-facing feedback form)
-- Backend: Node.js (serverless function or lightweight API) + email service (e.g. Nodemailer/SendGrid) for notifications
+- Next.js (App Router), React and TypeScript
+- Tailwind CSS, with design tokens in `src/app/globals.css`
+- Server logic in Next.js route handlers (`src/app/api`), plus an email service for notifications
+- Vitest for tests
+- Deployed on Vercel, with a preview deployment for every push
 - No local server or LAN dependency required
 
 ## Status
-Week 1 — Environment and toolchain setup. No functional code yet.
+The app has a root layout, navigation and a routed placeholder for each screen: the feedback form (`/`), the confirmation page (`/thank-you`) and a health check (`/health`, with the same data at `/api/health`). The feedback form, validation and email delivery are not built yet.
 
 ## Setup
-Frontend scaffold only (Week 1 — no form or email backend yet).
-
 ```bash
 npm install
 npm run dev
 ```
 
-Opens the Vite app at the URL printed in the terminal.
+The app opens at http://localhost:3000.
 
+## Scripts
+- `npm run dev` - start the development server
+- `npm run build` - type-check and build for production
+- `npm start` - run the production build
+- `npm test` - run the Vitest tests
+- `npm run lint` - run ESLint
+
+## Environment variables
+Copy `.env.example` to `.env.local` and fill in the values. Real values are never committed.
+
+| Variable | Where it is used | Notes |
+|---|---|---|
+| `INCHARGE_EMAIL` | Server only | Address that receives feedback. Never prefix it with `NEXT_PUBLIC_`. |
+
+On Vercel, set the same variables under the project's Environment Variables settings.
+
+## Notes
+- `npm audit` reports a few moderate findings that come from the Next.js template's dependencies. They have not been addressed yet.
 
 ## License
-MIT — see [LICENSE](./LICENSE)
+MIT - see [LICENSE](./LICENSE)

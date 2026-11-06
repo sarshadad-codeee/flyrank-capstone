@@ -21,3 +21,7 @@ Add Vitest. Write tests for getHealth: status ok, service name, node version, IS
 ## 3. Update project rules for Next.js (Claude, not Cursor)
 Prompt:
 Update .cursor/rules/project.mdc for the Next.js stack. Keep the FE-03 rules, but make the incharge-address check allow the variable name in server code only, and use ASCII only.
+
+## 4. Rewrite the README for the Next.js app (Claude, not Cursor)
+Prompt:
+Rewrite the README Stack, Status and Setup sections for the Next.js app. Describe the product only, with no round, week or assignment labels. Add scripts, an environment variables table that lists INCHARGE_EMAIL without a value, and a note about the npm audit findings.
