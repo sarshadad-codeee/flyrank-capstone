@@ -24,6 +24,9 @@ A feedback collection system for a gas utility's Customer Facilitation Center, w
 ## Status
 The app has a root layout, navigation and a routed placeholder for each screen: the feedback form (`/`), the confirmation page (`/thank-you`) and a health check (`/health`, with the same data at `/api/health`). The feedback form, validation and email delivery are not built yet.
 
+## Live preview
+https://flyrank-capstone-pink.vercel.app/
+
 ## Setup
 ```bash
 npm install
@@ -53,3 +56,4 @@ On Vercel, set the same variables under the project's Environment Variables sett
 
 ## License
 MIT - see [LICENSE](./LICENSE)
+
