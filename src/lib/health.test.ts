@@ -34,11 +34,12 @@ describe('getHealth', () => {
   });
 
   it('reports configured without exposing the address', async () => {
-    vi.stubEnv('INCHARGE_EMAIL', 'incharge@example.com');
+    vi.stubEnv('INCHARGE_EMAIL', 'someone@example.com');
 
     const report = await getHealth();
 
     expect(report.inchargeEmailConfigured).toBe(true);
-    expect(JSON.stringify(report)).not.toContain('incharge@example.com');
+    expect(JSON.stringify(report)).not.toContain('someone@example.com');
   });
 });
+

@@ -17,3 +17,7 @@ its uncached read in Suspense, as the bundled Next.js docs describe.
 ## 2. Vitest and a health test (Claude, not Cursor)
 Prompt:
 Add Vitest. Write tests for getHealth: status ok, service name, node version, ISO timestamp, email configured flag, and that the email address itself is never returned. Mock next/server because connection() needs a real request.
+
+## 3. Update project rules for Next.js (Claude, not Cursor)
+Prompt:
+Update .cursor/rules/project.mdc for the Next.js stack. Keep the FE-03 rules, but make the incharge-address check allow the variable name in server code only, and use ASCII only.
