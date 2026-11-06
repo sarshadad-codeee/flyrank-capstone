@@ -1,32 +1,36 @@
-# Project Conventions — Customer Feedback Module
+# Project Conventions - Customer Feedback Module
 
 ## Context
 Customer-facing feedback form for a gas utility's facilitation center. Customers scan a static QR/barcode at the counter using their own phone and mobile data. On submission, feedback is emailed directly to the incharge. No internet is required anywhere at the office.
 
 ## Stack
-- Frontend: React + TypeScript + Vite
-- Backend: Node.js (serverless/lightweight API) + email service integration
-- No LAN server, no local database
+- Next.js (App Router) + React + TypeScript + Tailwind CSS
+- Server Components by default. Client Components ("use client") only where interactivity is needed, such as the feedback form.
+- Server logic lives in route handlers under src/app/api, plus an email service integration
+- Design tokens live in src/app/globals.css (@theme block)
+- Deployed on Vercel. Every push gets a preview deployment.
+- No LAN server, no local database. The Vercel filesystem is read-only, so nothing may be written to disk at runtime.
 
 ## Conventions
 - Components: PascalCase, one per file, in /src/components
 - Types: explicit TypeScript interfaces for feedback data
-- Folders: /src/components, /src/pages, /src/lib, /src/types, /server
+- Folders: /src/app (routes and route handlers), /src/components, /src/lib, /src/types
+- Tests: Vitest, next to the code as *.test.ts. Next.js type-checks them during the build.
 
 ## Commit Convention
-Conventional Commits: feat, fix, docs, chore, refactor, style
+Conventional Commits: feat, fix, docs, chore, refactor, style, test
 
 ## AI Assistant Notes
 - Mobile-first, customer's own phone only
 - Never assume office/staff internet access
 - Trigger email to incharge on submission, no dashboard needed for MVP
 - Follow Conventional Commits for commit messages
-
+- Read the bundled Next.js docs in node_modules/next/dist/docs before using an API you are unsure of. This version differs from older ones.
 
 ## Rules learned in FE-03
-- Phone numbers: strip to digits, require 10-13 digits, reject repeated-digit numbers. Enforce in both src/lib/validateFeedback.ts and server/feedbackHandler.mjs. Tests must include "0000000000" and "----------".
+- Phone numbers: strip to digits, require 10-13 digits, reject repeated-digit numbers. Enforce with one shared function in src/lib/validateFeedback.ts, used by the form and by the route handler in src/app/api. Tests must include "0000000000" and "----------".
 - Every new function or component ships with a Vitest test in the same commit. Run npm test before committing and report the pass count.
-- UI text and source files are ASCII-only. This command must print nothing: git grep -nP "[^\x00-\x7F]" -- src server
-- The incharge address exists only in server env config (INCHARGE_EMAIL). This command must print nothing: git grep -n -E "INCHARGE_EMAIL|incharge@" -- src
+- UI text and source files are ASCII-only. This command must print nothing: git grep -nP "[^\x00-\x7F]" -- src .cursor
+- The incharge address exists only in server env config (INCHARGE_EMAIL), never in the repo and never with a NEXT_PUBLIC_ prefix. Only the variable name may appear, and only in server code (src/lib, src/app/api). These commands must print nothing: git grep -n -E "incharge@" -- src and git grep -n "INCHARGE_EMAIL" -- src/components
 - Form controls use <label htmlFor> and aria-describedby for errors. Tests locate fields with getByLabelText or getByRole. Rating buttons show visible text labels ("Very poor" to "Excellent"), not only digits.
 - README Status describes the product only. Never write round, week or assignment labels into docs.
