@@ -24,7 +24,7 @@ export default function HealthPage() {
   return (
     <section>
       <h1 className="text-2xl font-semibold">Health check</h1>
-      <Suspense fallback={<p className="mt-4 text-muted">Checking...</p>}>
+      <Suspense fallback={<p className="mt-4 text-muted-foreground">Checking...</p>}>
         <HealthDetails />
       </Suspense>
     </section>

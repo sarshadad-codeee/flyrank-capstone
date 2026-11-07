@@ -45,3 +45,11 @@ Build the second FE-05 component: tabs under src/playground following the ARIA t
 ## 9. Build the modal dialog with a focus trap and keyboard test (Claude, not Cursor)
 Prompt:
 Build the third FE-05 component: a modal dialog under src/playground following the ARIA dialog pattern, rendered in a portal with role dialog, aria-modal and aria-labelledby, moving focus in on open, trapping Tab and Shift+Tab, closing on Escape and backdrop click, returning focus to the opener, and making the rest of the page inert. Use an explicit props interface with no any, add a jsdom keyboard test, and add a Modal section to the playground page.
+
+## 10. Initialise shadcn/ui for the FE-05 comparison (Claude, not Cursor)
+Prompt:
+Initialise shadcn/ui in the capstone on the FE-05 branch with default answers, so its dialog and tabs can be added next and compared with the hand-built versions. Check the diff, the ASCII-only rule, tsc, lint and tests before committing.
+
+## 11. Fix shadcn init side effects and test its helpers (Claude, not Cursor)
+Prompt:
+After the shadcn init, restore the Geist font variable that globals.css broke, switch the three text-muted uses to text-muted-foreground and keep the old text grey for contrast, and add Vitest tests for the cn helper and the Button component.
