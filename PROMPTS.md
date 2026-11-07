@@ -29,3 +29,7 @@ Rewrite the README Stack, Status and Setup sections for the Next.js app. Describ
 ## 5. Rename package and add live URL (Claude, not Cursor)
 Prompt:
 Rename the package to customer-feedback-module without changing dependency versions, and add the live Vercel URL to the README. This branch also served as the test push for preview deployments.
+
+## 6. Plan FE-05 accessible components on the capstone (Claude, not Cursor)
+Prompt:
+Plan FE-05 (Accessible component fundamentals) on top of the capstone repo: a modal dialog, tabs and a disclosure built by hand in React + TypeScript under a playground, followed by a shadcn dialog and tabs comparison and NOTES.md. Cut a branch from master and give the first command.
