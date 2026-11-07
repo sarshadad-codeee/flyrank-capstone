@@ -58,3 +58,7 @@ After the shadcn init, restore the Geist font variable that globals.css broke, s
 Prompt:
 Add the shadcn dialog and tabs to the playground in a client demo component, and write Vitest keyboard tests for them, so their focus, Escape and arrow-key behaviour is measured before writing NOTES.md.
 
+
+## 13. Write NOTES.md comparing the hand-built components with shadcn (Claude, not Cursor)
+Prompt:
+Write NOTES.md for FE-05: name at least two concrete gaps between the hand-built modal and tabs and the shadcn versions, label each as read in code, measured in a test or seen in the browser, and list what could not be checked.
