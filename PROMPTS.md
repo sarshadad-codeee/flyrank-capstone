@@ -25,3 +25,7 @@ Update .cursor/rules/project.mdc for the Next.js stack. Keep the FE-03 rules, bu
 ## 4. Rewrite the README for the Next.js app (Claude, not Cursor)
 Prompt:
 Rewrite the README Stack, Status and Setup sections for the Next.js app. Describe the product only, with no round, week or assignment labels. Add scripts, an environment variables table that lists INCHARGE_EMAIL without a value, and a note about the npm audit findings.
+
+## 5. Rename package and add live URL (Claude, not Cursor)
+Prompt:
+Rename the package to customer-feedback-module without changing dependency versions, and add the live Vercel URL to the README. This branch also served as the test push for preview deployments.
