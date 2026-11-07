@@ -37,3 +37,7 @@ Plan FE-05 (Accessible component fundamentals) on top of the capstone repo: a mo
 ## 7. Build the disclosure component with a keyboard test (Claude, not Cursor)
 Prompt:
 Add the Vitest and Testing Library tooling, then build the first FE-05 component: a disclosure under src/playground with an explicit props interface, a jsdom keyboard test for Tab, Enter and Space, and a playground route that is not indexed.
+
+## 8. Build the tabs component with a keyboard test (Claude, not Cursor)
+Prompt:
+Build the second FE-05 component: tabs under src/playground following the ARIA tabs pattern, with roving tabindex, arrow keys with wrap, Home and End, aria-controls and aria-labelledby links, an explicit props interface with no any, a jsdom keyboard test, and a Tabs section on the playground page.
