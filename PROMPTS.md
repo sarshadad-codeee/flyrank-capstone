@@ -53,3 +53,8 @@ Initialise shadcn/ui in the capstone on the FE-05 branch with default answers, s
 ## 11. Fix shadcn init side effects and test its helpers (Claude, not Cursor)
 Prompt:
 After the shadcn init, restore the Geist font variable that globals.css broke, switch the three text-muted uses to text-muted-foreground and keep the old text grey for contrast, and add Vitest tests for the cn helper and the Button component.
+
+## 12. Add shadcn dialog and tabs demo and tests (Claude, not Cursor)
+Prompt:
+Add the shadcn dialog and tabs to the playground in a client demo component, and write Vitest keyboard tests for them, so their focus, Escape and arrow-key behaviour is measured before writing NOTES.md.
+
