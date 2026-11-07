@@ -66,3 +66,11 @@ Write NOTES.md for FE-05: name at least two concrete gaps between the hand-built
 ## 14. Update the README audit note and add the adoption cost to NOTES.md (Claude, not Cursor)
 Prompt:
 Read the npm audit output, work out which findings come from the lint tooling and which from shadcn, rewrite the README audit note with the new count without any round, week or assignment labels, and add a measured cost-of-adoption section to NOTES.md.
+
+## 15. Plan the streaming chat assignment on the capstone (Claude, not Cursor)
+Prompt:
+Plan the streaming AI chat interface on top of the capstone: a route handler using the AI SDK streamText with Claude, a useChat client with a thinking indicator, stop button, scroll-aware auto-scroll and mobile input, and one config module for the system prompt and model. Cut a branch from master and give the first command.
+
+## 16. Add the chat config module and request validator with tests (Claude, not Cursor)
+Prompt:
+Install the AI SDK packages, then write one chat config module for the system prompt, model and limits, plus a validateChatRequest function that keeps only text parts, drops empty messages and enforces length and count limits, each with Vitest tests. Inspect the real v7 type signatures before writing the route.
