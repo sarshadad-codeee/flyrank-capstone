@@ -41,3 +41,7 @@ Add the Vitest and Testing Library tooling, then build the first FE-05 component
 ## 8. Build the tabs component with a keyboard test (Claude, not Cursor)
 Prompt:
 Build the second FE-05 component: tabs under src/playground following the ARIA tabs pattern, with roving tabindex, arrow keys with wrap, Home and End, aria-controls and aria-labelledby links, an explicit props interface with no any, a jsdom keyboard test, and a Tabs section on the playground page.
+
+## 9. Build the modal dialog with a focus trap and keyboard test (Claude, not Cursor)
+Prompt:
+Build the third FE-05 component: a modal dialog under src/playground following the ARIA dialog pattern, rendered in a portal with role dialog, aria-modal and aria-labelledby, moving focus in on open, trapping Tab and Shift+Tab, closing on Escape and backdrop click, returning focus to the opener, and making the rest of the page inert. Use an explicit props interface with no any, add a jsdom keyboard test, and add a Modal section to the playground page.

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Disclosure } from "@/playground/Disclosure";
+import { ModalDemo } from "@/playground/ModalDemo";
 import { Tabs } from "@/playground/Tabs";
 import type { TabItem } from "@/playground/Tabs";
 
@@ -63,6 +64,13 @@ export default function PlaygroundPage() {
         </h2>
         <Tabs tabs={tabItems} label="Keyboard notes" />
       </section>
+      <section aria-labelledby="modal-heading" className="mb-10">
+        <h2 id="modal-heading" className="mb-3 text-xl font-medium">
+          Modal
+        </h2>
+        <ModalDemo />
+      </section>
     </main>
   );
 }
+
