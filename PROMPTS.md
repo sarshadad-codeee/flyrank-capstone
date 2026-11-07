@@ -74,3 +74,7 @@ Plan the streaming AI chat interface on top of the capstone: a route handler usi
 ## 16. Add the chat config module and request validator with tests (Claude, not Cursor)
 Prompt:
 Install the AI SDK packages, then write one chat config module for the system prompt, model and limits, plus a validateChatRequest function that keeps only text parts, drops empty messages and enforces length and count limits, each with Vitest tests. Inspect the real v7 type signatures before writing the route.
+
+## 17. Add the streaming chat route handler with tests (Claude, not Cursor)
+Prompt:
+Write the /api/chat route handler using the AI SDK streamText with the Anthropic provider, reading the system prompt and model from the config module, validating the body before any model call, passing the request abort signal, returning a generic stream error, and never exposing the API key. Add Vitest tests that mock the model and check each early-return case.
