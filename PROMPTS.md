@@ -78,3 +78,7 @@ Install the AI SDK packages, then write one chat config module for the system pr
 ## 17. Add the streaming chat route handler with tests (Claude, not Cursor)
 Prompt:
 Write the /api/chat route handler using the AI SDK streamText with the Anthropic provider, reading the system prompt and model from the config module, validating the body before any model call, passing the request abort signal, returning a generic stream error, and never exposing the API key. Add Vitest tests that mock the model and check each early-return case.
+
+## 18. Build the streaming chat UI with thinking indicator and stop button (Claude, not Cursor)
+Prompt:
+Build the /chat page and Chat component with the AI SDK useChat and DefaultChatTransport: render only text parts through a small helper, show a thinking indicator that hands off to the streamed text in the same position, a Send button that becomes Stop while generating, partial text kept after a stop, a fixed error message and a mobile-friendly input. Add Vitest tests with useChat mocked, and tests for the helper functions.
