@@ -33,3 +33,7 @@ Rename the package to customer-feedback-module without changing dependency versi
 ## 6. Plan FE-05 accessible components on the capstone (Claude, not Cursor)
 Prompt:
 Plan FE-05 (Accessible component fundamentals) on top of the capstone repo: a modal dialog, tabs and a disclosure built by hand in React + TypeScript under a playground, followed by a shadcn dialog and tabs comparison and NOTES.md. Cut a branch from master and give the first command.
+
+## 7. Build the disclosure component with a keyboard test (Claude, not Cursor)
+Prompt:
+Add the Vitest and Testing Library tooling, then build the first FE-05 component: a disclosure under src/playground with an explicit props interface, a jsdom keyboard test for Tab, Enter and Space, and a playground route that is not indexed.
