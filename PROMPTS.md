@@ -62,3 +62,7 @@ Add the shadcn dialog and tabs to the playground in a client demo component, and
 ## 13. Write NOTES.md comparing the hand-built components with shadcn (Claude, not Cursor)
 Prompt:
 Write NOTES.md for FE-05: name at least two concrete gaps between the hand-built modal and tabs and the shadcn versions, label each as read in code, measured in a test or seen in the browser, and list what could not be checked.
+
+## 14. Update the README audit note and add the adoption cost to NOTES.md (Claude, not Cursor)
+Prompt:
+Read the npm audit output, work out which findings come from the lint tooling and which from shadcn, rewrite the README audit note with the new count without any round, week or assignment labels, and add a measured cost-of-adoption section to NOTES.md.

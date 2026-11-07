@@ -52,7 +52,7 @@ Copy `.env.example` to `.env.local` and fill in the values. Real values are neve
 On Vercel, set the same variables under the project's Environment Variables settings.
 
 ## Notes
-- `npm audit` reports a few moderate findings that come from the Next.js template's dependencies. They have not been addressed yet.
+- `npm audit` reports 13 findings (2 low, 11 moderate), all in packages used for linting and for the shadcn/ui setup: eslint-config-next, typescript-eslint, and the shadcn package with its dependencies. They have not been addressed: the fixes npm suggests would downgrade packages to older major versions.
 
 ## License
 MIT - see [LICENSE](./LICENSE)

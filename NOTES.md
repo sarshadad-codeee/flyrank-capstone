@@ -66,3 +66,19 @@ with the keyboard only.
 Reach for the shadcn primitives first and read their source before
 writing my own. Writing the three components by hand made the keyboard
 rules concrete, which was the point of the exercise.
+
+## Cost of adopting shadcn (read in code, measured)
+
+- The init added six packages to `package.json`: `@base-ui/react`,
+  `class-variance-authority`, `cn`, `lucide-react`, `shadcn` and
+  `tw-animate-css`. `shadcn` went under `dependencies`, not
+  `devDependencies`.
+- The init rewrote `globals.css`. That broke two things in my app:
+  `--muted` became a light background colour, so three `text-muted`
+  uses became nearly invisible, and `--font-sans` pointed at itself,
+  which lost the Geist font variable. I fixed both and checked the
+  pages in the browser.
+- `npm audit` went from 8 to 13 findings (2 low, 11 moderate). By my
+  count five are new and come from the shadcn package and its
+  dependencies. The other eight come from the lint tooling.
+  The fixes npm suggests are downgrades, so I did not apply them.
