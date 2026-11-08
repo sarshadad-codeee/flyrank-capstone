@@ -98,3 +98,7 @@ Add auto-scroll to the chat that pins to the bottom only while the user is at th
 ## 22. Render streamed markdown safely in assistant messages (Claude, not Cursor)
 Prompt:
 Add markdown rendering for assistant messages with react-markdown, plus a tested closeOpenMarkdown helper that repairs unclosed code fences, inline code and bold markers so half-streamed markdown never breaks the layout. Open links in a new tab with noopener, drop images, and do not render raw HTML. Keep the user's own messages as plain text.
+
+## 23. Remove the unused Anthropic provider and review the README (Claude, not Cursor)
+Prompt:
+After switching the chat to the Gemini provider, remove the unused @ai-sdk/anthropic package, re-run all checks, and print the README environment variables and status sections so they can be updated with the new key name and the chat route.
