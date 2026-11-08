@@ -66,3 +66,47 @@ Write NOTES.md for FE-05: name at least two concrete gaps between the hand-built
 ## 14. Update the README audit note and add the adoption cost to NOTES.md (Claude, not Cursor)
 Prompt:
 Read the npm audit output, work out which findings come from the lint tooling and which from shadcn, rewrite the README audit note with the new count without any round, week or assignment labels, and add a measured cost-of-adoption section to NOTES.md.
+
+## 15. Plan the streaming chat assignment on the capstone (Claude, not Cursor)
+Prompt:
+Plan the streaming AI chat interface on top of the capstone: a route handler using the AI SDK streamText with Claude, a useChat client with a thinking indicator, stop button, scroll-aware auto-scroll and mobile input, and one config module for the system prompt and model. Cut a branch from master and give the first command.
+
+## 16. Add the chat config module and request validator with tests (Claude, not Cursor)
+Prompt:
+Install the AI SDK packages, then write one chat config module for the system prompt, model and limits, plus a validateChatRequest function that keeps only text parts, drops empty messages and enforces length and count limits, each with Vitest tests. Inspect the real v7 type signatures before writing the route.
+
+## 17. Add the streaming chat route handler with tests (Claude, not Cursor)
+Prompt:
+Write the /api/chat route handler using the AI SDK streamText with the Anthropic provider, reading the system prompt and model from the config module, validating the body before any model call, passing the request abort signal, returning a generic stream error, and never exposing the API key. Add Vitest tests that mock the model and check each early-return case.
+
+## 18. Build the streaming chat UI with thinking indicator and stop button (Claude, not Cursor)
+Prompt:
+Build the /chat page and Chat component with the AI SDK useChat and DefaultChatTransport: render only text parts through a small helper, show a thinking indicator that hands off to the streamed text in the same position, a Send button that becomes Stop while generating, partial text kept after a stop, a fixed error message and a mobile-friendly input. Add Vitest tests with useChat mocked, and tests for the helper functions.
+
+## 19. Switch the chat provider to the free Gemini API (Claude, not Cursor)
+Prompt:
+The programme's free-tier guide says FE-06 should use the free Gemini API through the AI SDK, with no paid API. Install the AI SDK Google provider and read its real key variable name and model IDs before changing the route, config and tests.
+
+## 20. Swap the chat route to Gemini and add a per-visitor rate limit (Claude, not Cursor)
+Prompt:
+Switch the chat route and config from the Anthropic provider to the AI SDK Google provider with the free-tier Gemini Flash-Lite model and the GOOGLE_GENERATIVE_AI_API_KEY variable. Add an in-memory per-visitor rate limiter returning 429 with Retry-After, with Vitest tests for the limiter and the route, and update .env.example with the variable name only.
+
+## 21. Add scroll-aware auto-scroll, jump to latest and a phone-width pass (Claude, not Cursor)
+Prompt:
+Add auto-scroll to the chat that pins to the bottom only while the user is at the bottom, releases when they scroll up, re-pins on send, and offers a Jump to latest button. Put the near-bottom check in a tested helper, make the log keyboard focusable, and make the send and stop buttons and the chat height work at phone width. Test the scroll behaviour with mocked scroll metrics.
+
+## 22. Render streamed markdown safely in assistant messages (Claude, not Cursor)
+Prompt:
+Add markdown rendering for assistant messages with react-markdown, plus a tested closeOpenMarkdown helper that repairs unclosed code fences, inline code and bold markers so half-streamed markdown never breaks the layout. Open links in a new tab with noopener, drop images, and do not render raw HTML. Keep the user's own messages as plain text.
+
+## 23. Remove the unused Anthropic provider and review the README (Claude, not Cursor)
+Prompt:
+After switching the chat to the Gemini provider, remove the unused @ai-sdk/anthropic package, re-run all checks, and print the README environment variables and status sections so they can be updated with the new key name and the chat route.
+
+## 24. Remove the literal incharge address string from a test (Claude, not Cursor)
+Prompt:
+The project rule says the incharge address prefix must never appear in src, but a config test contained it as a literal. Build the string from two parts so the test still checks the system prompt without breaking the rule.
+
+## 25. Add the missing README lines for the AI SDK and the Gemini key (Claude, not Cursor)
+Prompt:
+The README commit dropped two edits because of a PowerShell operator precedence mistake. Add the AI SDK line to the Stack section and the Gemini API key row to the environment variables table, with each replacement string wrapped in parentheses.

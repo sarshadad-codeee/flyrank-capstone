@@ -17,12 +17,13 @@ A feedback collection system for a gas utility's Customer Facilitation Center, w
 - Next.js (App Router), React and TypeScript
 - Tailwind CSS, with design tokens in `src/app/globals.css`
 - Server logic in Next.js route handlers (`src/app/api`), plus an email service for notifications
-- Vitest for tests
+- Vitest and Testing Library for tests
+- AI SDK with the Google Gemini provider for the streaming feedback assistant
 - Deployed on Vercel, with a preview deployment for every push
 - No local server or LAN dependency required
 
 ## Status
-The app has a root layout, navigation and a routed placeholder for each screen: the feedback form (`/`), the confirmation page (`/thank-you`) and a health check (`/health`, with the same data at `/api/health`). The feedback form, validation and email delivery are not built yet.
+The app has a root layout, navigation and a routed placeholder for each screen: the feedback form (`/`), the confirmation page (`/thank-you`) and a health check (`/health`, with the same data at `/api/health`). A feedback assistant at `/chat` streams AI replies from a route handler (`/api/chat`) to help customers describe their feedback; it has a stop button, scroll-aware auto-scroll and markdown rendering, and it cannot send feedback itself. The feedback form, validation and email delivery are not built yet.
 
 ## Live preview
 https://flyrank-capstone-pink.vercel.app/
@@ -48,6 +49,7 @@ Copy `.env.example` to `.env.local` and fill in the values. Real values are neve
 | Variable | Where it is used | Notes |
 |---|---|---|
 | `INCHARGE_EMAIL` | Server only | Address that receives feedback. Never prefix it with `NEXT_PUBLIC_`. |
+| `GOOGLE_GENERATIVE_AI_API_KEY` | Server only | Key for the Gemini API used by the chat route. Never prefix it with `NEXT_PUBLIC_`. |
 
 On Vercel, set the same variables under the project's Environment Variables settings.
 
