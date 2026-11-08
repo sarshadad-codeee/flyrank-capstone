@@ -102,3 +102,11 @@ Add markdown rendering for assistant messages with react-markdown, plus a tested
 ## 23. Remove the unused Anthropic provider and review the README (Claude, not Cursor)
 Prompt:
 After switching the chat to the Gemini provider, remove the unused @ai-sdk/anthropic package, re-run all checks, and print the README environment variables and status sections so they can be updated with the new key name and the chat route.
+
+## 24. Remove the literal incharge address string from a test (Claude, not Cursor)
+Prompt:
+The project rule says the incharge address prefix must never appear in src, but a config test contained it as a literal. Build the string from two parts so the test still checks the system prompt without breaking the rule.
+
+## 25. Add the missing README lines for the AI SDK and the Gemini key (Claude, not Cursor)
+Prompt:
+The README commit dropped two edits because of a PowerShell operator precedence mistake. Add the AI SDK line to the Stack section and the Gemini API key row to the environment variables table, with each replacement string wrapped in parentheses.

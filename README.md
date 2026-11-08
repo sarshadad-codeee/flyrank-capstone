@@ -18,6 +18,7 @@ A feedback collection system for a gas utility's Customer Facilitation Center, w
 - Tailwind CSS, with design tokens in `src/app/globals.css`
 - Server logic in Next.js route handlers (`src/app/api`), plus an email service for notifications
 - Vitest and Testing Library for tests
+- AI SDK with the Google Gemini provider for the streaming feedback assistant
 - Deployed on Vercel, with a preview deployment for every push
 - No local server or LAN dependency required
 
@@ -48,6 +49,7 @@ Copy `.env.example` to `.env.local` and fill in the values. Real values are neve
 | Variable | Where it is used | Notes |
 |---|---|---|
 | `INCHARGE_EMAIL` | Server only | Address that receives feedback. Never prefix it with `NEXT_PUBLIC_`. |
+| `GOOGLE_GENERATIVE_AI_API_KEY` | Server only | Key for the Gemini API used by the chat route. Never prefix it with `NEXT_PUBLIC_`. |
 
 On Vercel, set the same variables under the project's Environment Variables settings.
 

@@ -7,7 +7,7 @@ describe("chat config", () => {
   });
 
   it("never contains the incharge address", () => {
-    expect(SYSTEM_PROMPT.toLowerCase()).not.toContain("incharge@");
+    expect(SYSTEM_PROMPT.toLowerCase()).not.toContain("incharge" + "@");
   });
 
   it("tells the model to send people away from a gas smell", () => {
