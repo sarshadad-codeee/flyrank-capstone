@@ -94,3 +94,7 @@ Switch the chat route and config from the Anthropic provider to the AI SDK Googl
 ## 21. Add scroll-aware auto-scroll, jump to latest and a phone-width pass (Claude, not Cursor)
 Prompt:
 Add auto-scroll to the chat that pins to the bottom only while the user is at the bottom, releases when they scroll up, re-pins on send, and offers a Jump to latest button. Put the near-bottom check in a tested helper, make the log keyboard focusable, and make the send and stop buttons and the chat height work at phone width. Test the scroll behaviour with mocked scroll metrics.
+
+## 22. Render streamed markdown safely in assistant messages (Claude, not Cursor)
+Prompt:
+Add markdown rendering for assistant messages with react-markdown, plus a tested closeOpenMarkdown helper that repairs unclosed code fences, inline code and bold markers so half-streamed markdown never breaks the layout. Open links in a new tab with noopener, drop images, and do not render raw HTML. Keep the user's own messages as plain text.

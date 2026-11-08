@@ -5,6 +5,7 @@ import type { FormEvent, KeyboardEvent } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { Button } from "@/components/ui/button";
+import { MessageContent } from "@/components/MessageContent";
 import { MAX_USER_MESSAGE_CHARS } from "@/lib/chatConfig";
 import { getMessageText, shouldShowThinking } from "@/lib/chatState";
 import { isNearBottom } from "@/lib/scrollPin";
@@ -118,13 +119,13 @@ export function Chat() {
             >
               <div
                 className={
-                  "max-w-[85%] whitespace-pre-wrap break-words rounded-2xl px-4 py-3 " +
+                  "max-w-[85%] break-words rounded-2xl px-4 py-3 " +
                   (message.role === "user"
-                    ? "bg-primary text-primary-foreground"
+                    ? "whitespace-pre-wrap bg-primary text-primary-foreground"
                     : "bg-muted text-foreground")
                 }
               >
-                {text}
+                {message.role === "user" ? text : <MessageContent text={text} />}
               </div>
             </div>
           ))}
