@@ -110,3 +110,15 @@ The project rule says the incharge address prefix must never appear in src, but 
 ## 25. Add the missing README lines for the AI SDK and the Gemini key (Claude, not Cursor)
 Prompt:
 The README commit dropped two edits because of a PowerShell operator precedence mistake. Add the AI SDK line to the Stack section and the Gemini API key row to the environment variables table, with each replacement string wrapped in parentheses.
+
+## 26. Plan the tool results and structured output UI on the chat route (Claude, not Cursor)
+Prompt:
+Plan the tool results and structured output assignment on top of the existing streaming chat: a server-side draftFeedback tool with a Zod schema and execute function, typed tool parts rendered in four distinct states, a summary card component, a designed error state, and a README tool contract. Cut a branch from master and inspect the real tool types in the installed AI SDK first.
+
+## 27. Read the motion session transcript and inspect the tool part types (Claude, not Cursor)
+Prompt:
+Use the Motion with Intent session transcript to set motion rules for the four tool states (opacity and transform only, about 200ms ease-out, reduced motion respected, one fixed-height card), and inspect the installed AI SDK types for every tool part state, the tool helper, stopWhen and Gemini tool support before writing the tool file.
+
+## 28. Write the draftFeedback tool with a Zod schema and tests (Claude, not Cursor)
+Prompt:
+Write the server-side draftFeedback tool in one definition file: a small Zod input schema with describe() on every field, an execute function that returns a structured record with a category label, and a thrown EmergencyReportError for emergency urgency so the UI has a real error state. Separate the logic from the SDK wrapper and add Vitest tests for the schema and the logic.
