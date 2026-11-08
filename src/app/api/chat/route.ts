@@ -1,10 +1,13 @@
-import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
 import { convertToModelMessages, streamText } from "ai";
 import {
   CHAT_MODEL,
   MAX_OUTPUT_TOKENS,
+  RATE_LIMIT_MAX,
+  RATE_LIMIT_WINDOW_MS,
   SYSTEM_PROMPT,
 } from "@/lib/chatConfig";
+import { createRateLimiter, getClientKey } from "@/lib/rateLimit";
 import { validateChatRequest } from "@/lib/validateChatRequest";
 
 /** Upper bound on the raw request body, checked before parsing. */
@@ -13,8 +16,17 @@ const MAX_BODY_CHARS = 100_000;
 /** Text shown to the user when the stream fails. No provider details. */
 const STREAM_ERROR_TEXT = "Something went wrong. Please try again.";
 
-function jsonError(message: string, status: number): Response {
-  return Response.json({ error: message }, { status });
+const limiter = createRateLimiter({
+  limit: RATE_LIMIT_MAX,
+  windowMs: RATE_LIMIT_WINDOW_MS,
+});
+
+function jsonError(
+  message: string,
+  status: number,
+  headers?: Record<string, string>
+): Response {
+  return Response.json({ error: message }, { status, headers });
 }
 
 /**
@@ -23,8 +35,15 @@ function jsonError(message: string, status: number): Response {
  * is never sent to the browser.
  */
 export async function POST(request: Request): Promise<Response> {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
     return jsonError("Chat is not configured.", 500);
+  }
+
+  const verdict = limiter.check(getClientKey(request.headers));
+  if (!verdict.allowed) {
+    return jsonError("Too many requests. Please wait a moment.", 429, {
+      "Retry-After": String(verdict.retryAfterSeconds),
+    });
   }
 
   const raw = await request.text();
@@ -45,7 +64,7 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const result = streamText({
-    model: anthropic(CHAT_MODEL),
+    model: google(CHAT_MODEL),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(checked.messages),
     maxOutputTokens: MAX_OUTPUT_TOKENS,

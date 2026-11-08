@@ -82,3 +82,11 @@ Write the /api/chat route handler using the AI SDK streamText with the Anthropic
 ## 18. Build the streaming chat UI with thinking indicator and stop button (Claude, not Cursor)
 Prompt:
 Build the /chat page and Chat component with the AI SDK useChat and DefaultChatTransport: render only text parts through a small helper, show a thinking indicator that hands off to the streamed text in the same position, a Send button that becomes Stop while generating, partial text kept after a stop, a fixed error message and a mobile-friendly input. Add Vitest tests with useChat mocked, and tests for the helper functions.
+
+## 19. Switch the chat provider to the free Gemini API (Claude, not Cursor)
+Prompt:
+The programme's free-tier guide says FE-06 should use the free Gemini API through the AI SDK, with no paid API. Install the AI SDK Google provider and read its real key variable name and model IDs before changing the route, config and tests.
+
+## 20. Swap the chat route to Gemini and add a per-visitor rate limit (Claude, not Cursor)
+Prompt:
+Switch the chat route and config from the Anthropic provider to the AI SDK Google provider with the free-tier Gemini Flash-Lite model and the GOOGLE_GENERATIVE_AI_API_KEY variable. Add an in-memory per-visitor rate limiter returning 429 with Retry-After, with Vitest tests for the limiter and the route, and update .env.example with the variable name only.

@@ -3,12 +3,12 @@
  * the limits. The route handler imports from here and nothing else needs
  * to change when the model or the rules change.
  *
- * No secrets live here. The provider reads ANTHROPIC_API_KEY from the
+ * No secrets live here. The provider reads GOOGLE_GENERATIVE_AI_API_KEY from the
  * server environment, so the key never reaches the browser.
  */
 
-/** Model used for every reply. Haiku keeps a public demo cheap. */
-export const CHAT_MODEL = "claude-haiku-5-5";
+/** Model used for every reply. A Flash-Lite model fits the free Gemini API tier. */
+export const CHAT_MODEL = "gemini-3.5-flash-lite";
 
 /** Hard cap on tokens generated per reply. Limits cost per request. */
 export const MAX_OUTPUT_TOKENS = 600;
@@ -39,3 +39,7 @@ export const SYSTEM_PROMPT = [
   "- Do not ask for card numbers, passwords or national ID numbers.",
   "- Stay on the topic of gas service feedback. Politely decline other requests.",
 ].join("\n");
+
+/** Per-visitor request limit, to protect the shared free-tier quota. */
+export const RATE_LIMIT_MAX = 10;
+export const RATE_LIMIT_WINDOW_MS = 60_000;
