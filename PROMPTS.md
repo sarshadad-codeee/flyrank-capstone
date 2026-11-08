@@ -90,3 +90,7 @@ The programme's free-tier guide says FE-06 should use the free Gemini API throug
 ## 20. Swap the chat route to Gemini and add a per-visitor rate limit (Claude, not Cursor)
 Prompt:
 Switch the chat route and config from the Anthropic provider to the AI SDK Google provider with the free-tier Gemini Flash-Lite model and the GOOGLE_GENERATIVE_AI_API_KEY variable. Add an in-memory per-visitor rate limiter returning 429 with Retry-After, with Vitest tests for the limiter and the route, and update .env.example with the variable name only.
+
+## 21. Add scroll-aware auto-scroll, jump to latest and a phone-width pass (Claude, not Cursor)
+Prompt:
+Add auto-scroll to the chat that pins to the bottom only while the user is at the bottom, releases when they scroll up, re-pins on send, and offers a Jump to latest button. Put the near-bottom check in a tested helper, make the log keyboard focusable, and make the send and stop buttons and the chat height work at phone width. Test the scroll behaviour with mocked scroll metrics.
