@@ -130,3 +130,7 @@ Register the draftFeedback tool in the chat route with a step limit, add a teste
 ## 30. Build the four-state tool card UI and render message parts in order (Claude, not Cursor)
 Prompt:
 Build the tool UI: a pure getToolView state machine for the four tool part states, a ToolCard with a distinct look per state (shimmer skeleton, labelled input rows, a summary card with text badges, and a red error card with a fading tint layer), message-part rendering in Chat.tsx, no thinking dots while a tool card shows, and CSS using only opacity and transform with a reduced-motion rule. Add Vitest tests for each piece.
+
+## 31. Document the draftFeedback tool contract in the README (Claude, not Cursor)
+Prompt:
+Add a Chat tool contract section to the README with the tool name, when it runs, the Zod input fields, the output shape, the error behaviour and how each tool part state is shown, using product wording only with no round, week or assignment labels.
