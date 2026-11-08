@@ -1,20 +1,20 @@
 import { google } from "@ai-sdk/google";
-import { convertToModelMessages, streamText } from "ai";
+import { convertToModelMessages, stepCountIs, streamText } from "ai";
 import {
   CHAT_MODEL,
   MAX_OUTPUT_TOKENS,
+  MAX_TOOL_STEPS,
   RATE_LIMIT_MAX,
   RATE_LIMIT_WINDOW_MS,
   SYSTEM_PROMPT,
 } from "@/lib/chatConfig";
 import { createRateLimiter, getClientKey } from "@/lib/rateLimit";
+import { describeStreamError } from "@/lib/streamError";
+import { draftFeedbackTool } from "@/lib/tools/draftFeedback";
 import { validateChatRequest } from "@/lib/validateChatRequest";
 
 /** Upper bound on the raw request body, checked before parsing. */
 const MAX_BODY_CHARS = 100_000;
-
-/** Text shown to the user when the stream fails. No provider details. */
-const STREAM_ERROR_TEXT = "Something went wrong. Please try again.";
 
 const limiter = createRateLimiter({
   limit: RATE_LIMIT_MAX,
@@ -30,7 +30,9 @@ function jsonError(
 }
 
 /**
- * Streams a reply to the conversation in the request body.
+ * Streams a reply to the conversation in the request body, and lets the
+ * model call the draftFeedback tool. Tools run on the server only, and
+ * the client sends text history only, so it cannot forge a tool result.
  * The API key is read from the server environment by the provider and
  * is never sent to the browser.
  */
@@ -68,10 +70,12 @@ export async function POST(request: Request): Promise<Response> {
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(checked.messages),
     maxOutputTokens: MAX_OUTPUT_TOKENS,
+    tools: { draftFeedback: draftFeedbackTool },
+    stopWhen: stepCountIs(MAX_TOOL_STEPS),
     abortSignal: request.signal,
   });
 
   return result.toUIMessageStreamResponse({
-    onError: () => STREAM_ERROR_TEXT,
+    onError: describeStreamError,
   });
 }

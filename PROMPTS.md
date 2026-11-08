@@ -122,3 +122,7 @@ Use the Motion with Intent session transcript to set motion rules for the four t
 ## 28. Write the draftFeedback tool with a Zod schema and tests (Claude, not Cursor)
 Prompt:
 Write the server-side draftFeedback tool in one definition file: a small Zod input schema with describe() on every field, an execute function that returns a structured record with a category label, and a thrown EmergencyReportError for emergency urgency so the UI has a real error state. Separate the logic from the SDK wrapper and add Vitest tests for the schema and the logic.
+
+## 29. Register the tool in the chat route and let the emergency message through (Claude, not Cursor)
+Prompt:
+Register the draftFeedback tool in the chat route with a step limit, add a tested describeStreamError function that shows the emergency refusal but hides every other error, add a system prompt line about when to call the tool and never for a gas smell, move the generic error text out of the route, and update the route tests with a mock that includes tool and stepCountIs. Wrap every replacement string in parentheses and require each edit to match exactly once.
