@@ -6,13 +6,20 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { Button } from "@/components/ui/button";
 import { MessageContent } from "@/components/MessageContent";
+import { ToolCard } from "@/components/ToolCard";
 import { MAX_USER_MESSAGE_CHARS } from "@/lib/chatConfig";
-import { getMessageText, shouldShowThinking } from "@/lib/chatState";
+import { shouldShowThinking } from "@/lib/chatState";
 import { isNearBottom } from "@/lib/scrollPin";
+import { getToolView, readToolPart } from "@/lib/toolView";
+import type { ToolView } from "@/lib/toolView";
 
 const transport = new DefaultChatTransport({ api: "/api/chat" });
 
 const ERROR_TEXT = "Something went wrong. Please try again.";
+
+type Entry =
+  | { key: string; kind: "text"; role: string; text: string }
+  | { key: string; kind: "tool"; view: ToolView };
 
 function ThinkingBubble() {
   return (
@@ -89,9 +96,23 @@ export function Chat() {
     }
   }
 
-  const visible = messages
-    .map((message) => ({ message, text: getMessageText(message) }))
-    .filter((item) => item.text.trim() !== "");
+  // Message parts in order: text parts and draftFeedback tool parts.
+  const entries: Entry[] = messages.flatMap((message) =>
+    message.parts.flatMap((part, index): Entry[] => {
+      const key = message.id + ":" + index;
+      if (part.type === "text") {
+        if (part.text.trim() === "") return [];
+        return [{ key, kind: "text", role: message.role, text: part.text }];
+      }
+      const tool = readToolPart(part);
+      if (tool) {
+        const view = getToolView(tool);
+        if (view.kind === "unsupported") return [];
+        return [{ key, kind: "tool", view }];
+      }
+      return [];
+    })
+  );
 
   return (
     <div className="flex h-[70dvh] min-h-80 flex-col gap-3">
@@ -104,31 +125,41 @@ export function Chat() {
           tabIndex={0}
           className="h-full space-y-3 overflow-y-auto overscroll-contain rounded-lg border border-border p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         >
-          {visible.length === 0 && !thinking && (
+          {entries.length === 0 && !thinking && (
             <p className="text-muted-foreground">
               Tell me what happened with your gas service and I will help you
               put it into a clear message for the feedback form.
             </p>
           )}
-          {visible.map(({ message, text }) => (
-            <div
-              key={message.id}
-              className={
-                message.role === "user" ? "flex justify-end" : "flex justify-start"
-              }
-            >
+          {entries.map((entry) =>
+            entry.kind === "tool" ? (
+              <div key={entry.key} className="flex justify-start">
+                <ToolCard view={entry.view} />
+              </div>
+            ) : (
               <div
+                key={entry.key}
                 className={
-                  "max-w-[85%] break-words rounded-2xl px-4 py-3 " +
-                  (message.role === "user"
-                    ? "whitespace-pre-wrap bg-primary text-primary-foreground"
-                    : "bg-muted text-foreground")
+                  entry.role === "user" ? "flex justify-end" : "flex justify-start"
                 }
               >
-                {message.role === "user" ? text : <MessageContent text={text} />}
+                <div
+                  className={
+                    "max-w-[85%] break-words rounded-2xl px-4 py-3 " +
+                    (entry.role === "user"
+                      ? "whitespace-pre-wrap bg-primary text-primary-foreground"
+                      : "bg-muted text-foreground")
+                  }
+                >
+                  {entry.role === "user" ? (
+                    entry.text
+                  ) : (
+                    <MessageContent text={entry.text} />
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
           {thinking && <ThinkingBubble />}
         </div>
         {showJump && (

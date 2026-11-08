@@ -134,3 +134,24 @@
     @apply font-sans;
   }
 }
+
+/* Tool card motion: opacity and transform only, about 200ms. */
+@keyframes tool-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes tool-enter { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes tool-pop { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes tool-shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+.tool-enter { animation: tool-enter 200ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+.tool-pop { animation: tool-pop 200ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+.tool-tint { animation: tool-fade 200ms ease-out both; }
+.tool-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(128, 128, 128, 0.18), transparent);
+  animation: tool-shimmer 1.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-enter, .tool-pop { animation: tool-fade 120ms linear both; }
+  .tool-shimmer::after { animation: none; display: none; }
+}

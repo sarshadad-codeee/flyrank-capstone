@@ -28,6 +28,7 @@ export function shouldShowThinking(
   return (
     last !== undefined &&
     last.role === "assistant" &&
-    getMessageText(last).trim() === ""
+    getMessageText(last).trim() === "" &&
+    !last.parts.some((part) => part.type.startsWith("tool-"))
   );
 }
