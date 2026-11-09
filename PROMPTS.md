@@ -134,3 +134,7 @@ Build the tool UI: a pure getToolView state machine for the four tool part state
 ## 31. Document the draftFeedback tool contract in the README (Claude, not Cursor)
 Prompt:
 Add a Chat tool contract section to the README with the tool name, when it runs, the Zod input fields, the output shape, the error behaviour and how each tool part state is shown, using product wording only with no round, week or assignment labels.
+
+## 32. Add a tool states gallery to the playground (Claude, not Cursor)
+Prompt:
+Add a Chat tool states section to the playground that renders every tool card state, including both error variants, from fixed sample data with no model call, labelled as sample data, so reviewers can see the drafting, working and error states that are hard to trigger in the real chat. Add a Vitest test and wrap every replacement string in parentheses with exact-once anchors.
