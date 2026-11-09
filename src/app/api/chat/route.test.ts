@@ -5,18 +5,31 @@ import { POST } from "./route";
 import {
   CHAT_MODEL,
   MAX_OUTPUT_TOKENS,
+  MAX_TOOL_STEPS,
   RATE_LIMIT_MAX,
   SYSTEM_PROMPT,
 } from "@/lib/chatConfig";
+import { EmergencyReportError } from "@/lib/tools/draftFeedback";
 
 vi.mock("ai", () => ({
   streamText: vi.fn(),
   convertToModelMessages: vi.fn(async (messages: unknown) => messages),
+  stepCountIs: vi.fn((count: number) => ({ stepCount: count })),
+  tool: (definition: unknown) => definition,
 }));
 
 vi.mock("@ai-sdk/google", () => ({
   google: vi.fn((id: string) => ({ modelId: id })),
 }));
+
+interface ResponseOptions {
+  onError?: (error: unknown) => string;
+}
+
+const toResponse = vi.fn((options?: ResponseOptions) => {
+  void options;
+  return new Response("stream");
+});
 
 let visitor = 0;
 
@@ -40,8 +53,9 @@ beforeEach(() => {
   vi.stubEnv("GOOGLE_GENERATIVE_AI_API_KEY", "test-key-not-real");
   vi.mocked(streamText).mockReset();
   vi.mocked(google).mockClear();
+  toResponse.mockClear();
   vi.mocked(streamText).mockReturnValue({
-    toUIMessageStreamResponse: () => new Response("stream"),
+    toUIMessageStreamResponse: toResponse,
   } as unknown as ReturnType<typeof streamText>);
 });
 
@@ -84,6 +98,20 @@ describe("POST /api/chat", () => {
     expect(options.system).toBe(SYSTEM_PROMPT);
     expect(options.maxOutputTokens).toBe(MAX_OUTPUT_TOKENS);
     expect(options.abortSignal).toBeInstanceOf(AbortSignal);
+  });
+
+  it("registers the draftFeedback tool with a step limit", async () => {
+    await POST(post(goodBody));
+    const options = vi.mocked(streamText).mock.calls[0][0];
+    expect(Object.keys(options.tools ?? {})).toEqual(["draftFeedback"]);
+    expect(options.stopWhen).toEqual({ stepCount: MAX_TOOL_STEPS });
+  });
+
+  it("shows the emergency message but hides other errors", async () => {
+    await POST(post(goodBody));
+    const options = toResponse.mock.calls[0][0];
+    expect(options?.onError?.(new EmergencyReportError())).toMatch(/emergency/i);
+    expect(options?.onError?.(new Error("provider secret detail"))).not.toContain("secret");
   });
 
   it("returns 429 with Retry-After once a visitor passes the limit", async () => {

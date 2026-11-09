@@ -40,3 +40,20 @@ describe("shouldShowThinking", () => {
     expect(shouldShowThinking("streaming", [])).toBe(false);
   });
 });
+
+
+describe("shouldShowThinking with tool parts", () => {
+  const toolOnly = {
+    role: "assistant",
+    parts: [{ type: "tool-draftFeedback" }],
+  };
+  const asked = { role: "user", parts: [{ type: "text", text: "Hi" }] };
+
+  it("hides the dots while a tool card is showing", () => {
+    expect(shouldShowThinking("streaming", [asked, toolOnly])).toBe(false);
+  });
+
+  it("still shows the dots right after sending", () => {
+    expect(shouldShowThinking("submitted", [asked])).toBe(true);
+  });
+});

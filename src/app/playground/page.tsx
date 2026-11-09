@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Disclosure } from "@/playground/Disclosure";
 import { ModalDemo } from "@/playground/ModalDemo";
 import { ShadcnDemo } from "@/playground/ShadcnDemo";
+import { ToolStatesDemo } from "@/playground/ToolStatesDemo";
 import { Tabs } from "@/playground/Tabs";
 import type { TabItem } from "@/playground/Tabs";
 
@@ -76,6 +77,12 @@ export default function PlaygroundPage() {
           shadcn versions
         </h2>
         <ShadcnDemo />
+      </section>
+      <section aria-labelledby="tool-states-heading" className="mb-10">
+        <h2 id="tool-states-heading" className="mb-3 text-xl font-medium">
+          Chat tool states
+        </h2>
+        <ToolStatesDemo />
       </section>
     </main>
   );
